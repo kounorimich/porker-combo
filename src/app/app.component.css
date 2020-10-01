@@ -1,0 +1,17 @@
+td {
+  color: gray;
+  width: 30px;
+  height: 30px;
+}
+
+td:hover {
+  cursor: pointer;
+}
+
+.in-range {
+  background-color : gray;
+  color: white;
+}
+
+
+
