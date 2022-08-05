@@ -1,202 +1,134 @@
-{{range.toString()}}
-<table border="1">
+<div class="row">
+  <div class="col-8">
 
-  <tr>
-    <td (click)="toggleHand('AA')" [class.in-range]="range.hasForLabel('AA')">AA</td>
-    <td (click)="toggleHand('AKs')" [class.in-range]="range.hasForLabel('AKs')">AK</td>
-    <td (click)="toggleHand('AQs')" [class.in-range]="range.hasForLabel('AQs')">AQ</td>
-    <td (click)="toggleHand('AJs')" [class.in-range]="range.hasForLabel('AJs')">AJ</td>
-    <td (click)="toggleHand('ATs')" [class.in-range]="range.hasForLabel('ATs')">AT</td>
-    <td (click)="toggleHand('A9s')" [class.in-range]="range.hasForLabel('A9s')">A9</td>
-    <td (click)="toggleHand('A8s')" [class.in-range]="range.hasForLabel('A8s')">A8</td>
-    <td (click)="toggleHand('A7s')" [class.in-range]="range.hasForLabel('A7s')">A7</td>
-    <td (click)="toggleHand('A6s')" [class.in-range]="range.hasForLabel('A6s')">A6</td>
-    <td (click)="toggleHand('A5s')" [class.in-range]="range.hasForLabel('A5s')">A5</td>
-    <td (click)="toggleHand('A4s')" [class.in-range]="range.hasForLabel('A4s')">A4</td>
-    <td (click)="toggleHand('A3s')" [class.in-range]="range.hasForLabel('A3s')">A3</td>
-    <td (click)="toggleHand('A2s')" [class.in-range]="range.hasForLabel('A2s')">A2</td>
-  </tr>
-  <tr>
-    <td>AK</td>
-    <td>KK</td>
-    <td>KQ</td>
-    <td>KJ</td>
-    <td>KT</td>
-    <td>K9</td>
-    <td>K8</td>
-    <td>K7</td>
-    <td>K6</td>
-    <td>K5</td>
-    <td>K4</td>
-    <td>K3</td>
-    <td>K2</td>
-  </tr>
-  <tr>
-    <td>AQ</td>
-    <td>KQ</td>
-    <td>QQ</td>
-    <td>QJ</td>
-    <td>QT</td>
-    <td>Q9</td>
-    <td>Q8</td>
-    <td>Q7</td>
-    <td>Q6</td>
-    <td>Q5</td>
-    <td>Q4</td>
-    <td>Q3</td>
-    <td>Q2</td>
-  </tr>
-  <tr>
-    <td>AJ</td>
-    <td>KJ</td>
-    <td>QJ</td>
-    <td>JJ</td>
-    <td>JT</td>
-    <td>J9</td>
-    <td>J8</td>
-    <td>J7</td>
-    <td>J6</td>
-    <td>J5</td>
-    <td>J4</td>
-    <td>J3</td>
-    <td>J2</td>
-  </tr>
-  <tr>
-    <td>AT</td>
-    <td>KT</td>
-    <td>QT</td>
-    <td>JT</td>
-    <td>TT</td>
-    <td>T9</td>
-    <td>T8</td>
-    <td>T7</td>
-    <td>T6</td>
-    <td>T5</td>
-    <td>T4</td>
-    <td>T3</td>
-    <td>T2</td>
-  </tr>
-  <tr>
-    <td>A9</td>
-    <td>K9</td>
-    <td>Q9</td>
-    <td>J9</td>
-    <td>T9</td>
-    <td>99</td>
-    <td>98</td>
-    <td>97</td>
-    <td>96</td>
-    <td>95</td>
-    <td>94</td>
-    <td>93</td>
-    <td>92</td>
-  </tr>
-  <tr>
-    <td>A8</td>
-    <td>K8</td>
-    <td>Q8</td>
-    <td>J8</td>
-    <td>T8</td>
-    <td>98</td>
-    <td>88</td>
-    <td>87</td>
-    <td>86</td>
-    <td>85</td>
-    <td>84</td>
-    <td>83</td>
-    <td>82</td>
-  </tr>
-  <tr>
-    <td>A7</td>
-    <td>K7</td>
-    <td>Q7</td>
-    <td>J7</td>
-    <td>T7</td>
-    <td>97</td>
-    <td>87</td>
-    <td>77</td>
-    <td>76</td>
-    <td>75</td>
-    <td>74</td>
-    <td>73</td>
-    <td>72</td>
-  </tr>
-  <tr>
-    <td>A6</td>
-    <td>K6</td>
-    <td>Q6</td>
-    <td>J6</td>
-    <td>T6</td>
-    <td>96</td>
-    <td>86</td>
-    <td>76</td>
-    <td>66</td>
-    <td>65</td>
-    <td>64</td>
-    <td>63</td>
-    <td>62</td>
-  </tr>
-  <tr>
-    <td>A5</td>
-    <td>K5</td>
-    <td>Q5</td>
-    <td>J5</td>
-    <td>T5</td>
-    <td>95</td>
-    <td>85</td>
-    <td>75</td>
-    <td>65</td>
-    <td>55</td>
-    <td>54</td>
-    <td>53</td>
-    <td>52</td>
-  </tr>
-  <tr>
-    <td>A4</td>
-    <td>K4</td>
-    <td>Q4</td>
-    <td>J4</td>
-    <td>T4</td>
-    <td>94</td>
-    <td>84</td>
-    <td>74</td>
-    <td>64</td>
-    <td>54</td>
-    <td>44</td>
-    <td>43</td>
-    <td>42</td>
-  </tr>
-  <tr>
-    <td>A3</td>
-    <td>K3</td>
-    <td>Q3</td>
-    <td>J3</td>
-    <td>T3</td>
-    <td>93</td>
-    <td>83</td>
-    <td>73</td>
-    <td>63</td>
-    <td>53</td>
-    <td>43</td>
-    <td>33</td>
-    <td>32</td>
-  </tr>
-  <tr>
-    <td>A2</td>
-    <td>K2</td>
-    <td>Q2</td>
-    <td>J2</td>
-    <td>T2</td>
-    <td>92</td>
-    <td>82</td>
-    <td>72</td>
-    <td>62</td>
-    <td>52</td>
-    <td>42</td>
-    <td>32</td>
-    <td>22</td>
-  </tr>
+    <h2 id="hoge">コンボ数：{{range.count}}</h2>
+    <h2>全体の{{ calculatePercentage()}}%</h2>
+    <button class="btn-info btn" (click)="range.allClear()">clear range</button>
+    <table class="range-table">
+
+<!--      レンジ表-->
+      <ng-container *ngFor="let row of All_Row">
+        <tr>
+          <ng-container *ngFor="let hand of row">
+            <td [id]="hand.label" class="hand-option" [class.in-range]="range.hasByLabel(hand.label)" [class.suited]="hand.isSuited()" [class.pocket-pair]="hand.isPocketPair()"
+                [class.in-condition]="inCondition(hand)">{{hand.label.replace("p", "")}}</td>
+
+          </ng-container>
+        </tr>
+      </ng-container>
 
 
-</table>
-<router-outlet></router-outlet>
+    </table>
+
+    <!--    レンジ、ハンドのカウント-->
+    <div class="col-6">
+      <table class="table" id="narrowed-combo-count-table">
+        <tr>
+          <th>Hand Range Combos Count</th>
+          <td>{{block(range.combos).size}}/{{allComboMinusBlocker.size}}
+            ({{block(range.combos).size / allComboMinusBlocker.size | percent}})
+          </td>
+
+        </tr>
+      </table>
+      <table class="table" id="range-count-table">
+        <tr>
+          <th>Narrowed Combos Count</th>
+          <td>{{narrowedCombos.size}}/{{block(range.combos).size}}
+            ({{narrowedCombos.size / block(range.combos).size | percent}})
+          </td>
+        </tr>
+      </table>
+
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+
+<!--  ハンドを条件で絞るセクション-->
+  <div class="col-4">
+    <h2>Blocker</h2>
+    <button>clear</button>
+    <table>
+      <tr *ngFor="let suit of AllSuits">
+        <td *ngFor="let num of AllNums">
+          <!--        あとで画像に差しかえる-->
+          <button
+            (click)="toggleBlocker(num.value, suit.value)"
+            [class.blocker-selected]="blocker.has(cardFromNumAndSuit(num.value, suit.value))"
+          >{{num.label}}{{suit.label}}</button>
+        </td>
+      </tr>
+
+
+    </table>
+
+
+    <ng-template [ngTemplateOutlet]="narrowing_type_option1"></ng-template>
+
+
+  </div>
+</div>
+
+<ng-template #narrowing_type_option1>
+  <input type="radio" id="opt1-have" [(ngModel)]="opt1_selected" [value]="0" (selectionchange)="opt1_selected = 0">
+  <label for="opt1-have">have</label>
+  <input type="radio" id="opt1-suited" value="suited" [(ngModel)]="opt1_selected" (selectionchange)="opt1_selected = 1">
+  <label for="opt1-suited">suited</label>
+  <input type="radio" id="opt1-pocket-pair" value="pocket-pair" [(ngModel)]="opt1_selected" (selectionchange)="opt1_selected = 2">
+  <label for="opt1-pocket-pair">pocket-pair</label>
+<!--  <select #narrowing_type name="narrowing_type" id="">-->
+<!--    <option #opt1 value="have">have</option>-->
+<!--    <option value="suited_with">suited with</option>-->
+<!--    <option value="pair_of">pair of</option>-->
+<!--  </select>-->
+
+  <table *ngIf="opt1_selected === 0">
+    <tr>
+      <td *ngFor="let num of AllNums">
+        <button [class.narrowingByNum-selected]="narrowing_1_selectedNum === num.value"
+                (click)="updateNarrowing_1_byNum(0, num.value.toString())">{{num.label}}</button>
+      </td>
+    </tr>
+    <tr *ngFor="let suit of AllSuits">
+      <td *ngFor="let num of AllNums">
+        <!--        あとで画像に差しかえる-->
+        <button
+        >{{num.label}}{{suit.label}}</button>
+
+      </td>
+    </tr>
+
+
+  </table>
+</ng-template>
+
+
+<!--選択肢をここに用意-->
+<ng-template name="" #numOptions hidden>
+  <option value="Any" [defaultSelected]="true">Any</option>
+  <option value="14">A</option>
+  <option value="13">K</option>
+  <option value="12">Q</option>
+  <option value="11">J</option>
+  <option value="10">T</option>
+  <option value="9">9</option>
+  <option value="8">8</option>
+  <option value="7">7</option>
+  <option value="6">7</option>
+  <option value="5">5</option>
+  <option value="4">4</option>
+  <option value="3">3</option>
+  <option value="2">2</option>
+</ng-template>
+
+<ng-template name="" #suitOptions hide>
+  <option value="Any" [defaultSelected]="true">Any</option>
+  <option value="c">♣</option>
+  <option value="d">♦</option>
+  <option value="h">♥</option>
+  <option value="s">♠</option>
+</ng-template>
+
+
+

@@ -1,20 +1,19 @@
-import {CardModel} from './CardModel';
-import {Card} from './Cards';
+import {Card} from '../card/Card';
 
 export class Combo {
-  cards: CardModel[];
-  constructor(card1: CardModel, card2: CardModel) {
+  cards: Card[];
+  constructor(card1: Card, card2: Card) {
     this.cards = [card1, card2];
   }
 
   label(): string {
     return (this.cards[0].label() + ' ' + this.cards[1].label());
-  }　
+  }
 
   hasNum(n: number): boolean {
     return this.cards[0].num === n || this.cards[1].num === n;
   }
-  hasSuit(suit: string){　
+  hasSuit(suit: string){
     return this.cards[0].suit === suit || this.cards[1].suit === suit;
   }
 

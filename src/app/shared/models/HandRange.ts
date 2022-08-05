@@ -1,18 +1,38 @@
-import {Combo} from './Combo';
-import {Hand} from './Hand';
-import {HandComboModel} from './HandComboModel';
-import {AllList} from './AllHandComboList';
+import {Combo} from './combo/Combo';
+import {Hand} from './hand/Hand';
+import {Condition} from './Condition';
+import {Hands} from './hand/Hands';
 
-export class HandRange extends Set<HandComboModel> {
-  addHand(hand: HandComboModel) {
+
+export class HandRange extends Set<Hand> {
+  public combos: Set<Combo> = new Set();
+  public count = this.combos.size;
+
+
+  constructor() {
+    super();
+  }
+
+  static fromCombos(combos: Set<Combo>): HandRange {
+    return Object.values(Hands).filter()
+  }
+
+  narrowedCombos(condition: Condition): Set<Combo> {
+    return new Set(Array.from(this.combos).filter(c => condition.condition(c)))
+  }
+
+  addHand(hand: Hand) {
     this.add(hand);
+    hand.combos.forEach(c => this.combos.add(c));
   }
 
-  removeHand(hand: HandComboModel) {
+
+  removeHand(hand: Hand) {
     this.delete(hand);
+    hand.combos.forEach(c => this.combos.delete(c));
   }
 
-  toggleHand(hand: HandComboModel) {
+  toggleHand(hand: Hand) {
     if (!this.has(hand)) {
       this.addHand(hand);
     } else {
@@ -20,10 +40,34 @@ export class HandRange extends Set<HandComboModel> {
     }
   }
 
-  hasForLabel(label: string): boolean {
-    const hand: HandComboModel = AllList.AllHands.find((h) => h.label === label);
-    return this.has(hand);
+  // すでに存在するかどうかに関わらず登録する
+  addHandAnyway(hand: Hand) {
+    this.addHand(hand)
   }
+
+  // すでに存在するかどうかに関わらず登録する
+  removeHandAnyway(hand: Hand) {
+    this.removeHand(hand)
+  }
+
+  allClear() {
+    this.clear();
+    this.combos = new Set();
+  }
+
+  hasByLabel(label: string): boolean {
+    return this.has(Hand.label2Hand(label));
+  }
+
+
+
+  // numOfCombo(): number {
+  //   let count = 0;
+  //   this.forEach(hand => {
+  //     count = count + hand.combos.length;
+  //   });
+  //   return count;
+  // }
 
   toString() {
     let s = '';
@@ -32,4 +76,7 @@ export class HandRange extends Set<HandComboModel> {
     }
     return s;
   }
+
+
 }
+
