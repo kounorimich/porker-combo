@@ -1,0 +1,12 @@
+<li>
+  {{folder.name}}
+  <ul>
+    <ng-container *ngFor="let e of folder.directoryEntries">
+
+      <app-directory-entry *ngIf="e.isFolder" (rangeSelected)="rangeClicked($event)"
+                           [folder]="asFolder(e)"></app-directory-entry>
+      <app-range-entry *ngIf="!e.isFolder" (rangeSelected)="rangeClicked($event)"
+                       [range]="asHandRange(e)"></app-range-entry>
+    </ng-container>
+  </ul>
+</li>

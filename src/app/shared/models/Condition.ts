@@ -1,17 +1,14 @@
-import {Hands} from './hand/Hands';
 import {Combo} from './combo/Combo';
-import {Num} from './Num';
-import {Suit} from './Suit';
-
-
 
 
 export class Condition {
-  condition: (combo: Combo) => boolean;
+  check: (combo: Combo) => boolean;
 
   constructor(c: (combo: Combo) => boolean) {
-    this.condition = c;
+    this.check = c;
   }
+
+  static Empty = new Condition(c => true)
 }
 
 

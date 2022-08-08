@@ -1,42 +1,54 @@
 import {Card} from '../card/Card';
+import {CardNumber} from '../card/CardNumber';
+import {CardSuit} from '../card/CardSuit';
 
 export class Combo {
-  cards: Card[];
-  constructor(card1: Card, card2: Card) {
-    this.cards = [card1, card2];
+  card1: Card
+  card2: Card
+  public constructor(card1: Card, card2: Card) {
+    this.card1 = card1;
+    this.card2 = card2;
   }
 
   label(): string {
-    return (this.cards[0].label() + ' ' + this.cards[1].label());
+    return (this.card1.label() + ' ' + this.card2.label());
   }
 
-  hasNum(n: number): boolean {
-    return this.cards[0].num === n || this.cards[1].num === n;
-  }
-  hasSuit(suit: string){
-    return this.cards[0].suit === suit || this.cards[1].suit === suit;
+  // hasCards(cards: Set<Card>): boolean {
+  //
+  //   return this.card1 === card || this.card2 === card;
+  // }
+
+  notHasAny(cards: Set<Card>): boolean {
+    for (let c of cards.values()) {
+      if ((this.card1 === c) || this.card2 === c) {
+        return false
+      }
+    }
+    return true;
   }
 
+  hasAny(cards: Set<Card>): boolean {
+    return !this.notHasAny(cards)
+  }
+
+  hasNum(n: CardNumber): boolean {
+    return this.card1.num === n || this.card2.num === n;
+  }
+  hasSuit(suit: CardSuit){
+    return this.card1.suit === suit || this.card2.suit === suit;
+  }
+  isSuitedOf(suit: CardSuit) {
+    return this.card1.suit === suit && this.card2.suit === suit;
+  }
   isSuited() {
-    return this.cards[0].suit === this.cards[1].suit;
+    return this.card1.suit === this.card2.suit
+  }
+  isPocketPair() {
+    return this.card1.num === this.card2.num;
   }
 
-  is_c_Suited() {
-    return this.cards[0].suit === 'c' || this.cards[1].suit === 'c';
-  }
-
-  is_h_Suited() {
-    return this.cards[0].suit === 'h' || this.cards[1].suit === 'h';
-  }
-  is_d_Suited() {
-    return this.cards[0].suit === 'd' || this.cards[1].suit === 'd';
-  }
-
-  is_s_Suited() {
-    return this.cards[0].suit === 's' || this.cards[1].suit === 's';
-  }
-
-  isPokectPair() {
-    return this.cards[0].num === this.cards[1].num;
+  isPocketPairOf(number: CardNumber) {
+    return this.card1.num === number && this.card2.num === number;
   }
 }

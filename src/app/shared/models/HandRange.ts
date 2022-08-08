@@ -1,82 +1,89 @@
 import {Combo} from './combo/Combo';
 import {Hand} from './hand/Hand';
-import {Condition} from './Condition';
-import {Hands} from './hand/Hands';
+import {DirectoryEntry} from './DirectoryEntry';
 
 
-export class HandRange extends Set<Hand> {
+export class HandRange implements DirectoryEntry{
+  readonly isFolder = false;
+  public name: string
+  public description: string
+  public hands: Set<Hand> = new Set();
   public combos: Set<Combo> = new Set();
-  public count = this.combos.size;
 
-
-  constructor() {
-    super();
+  constructor(name: string, description: string, hands: Set<Hand>) {
+    this.name = name;
+    this.description = description;
+    this.hands = hands;
+    this.combos = hands.
   }
 
-  static fromCombos(combos: Set<Combo>): HandRange {
-    return Object.values(Hands).filter()
+  static dummyRange = new HandRange(
+  'UTG_6_MAX_OPEN_RAISE',
+  'default',
+  new Set([
+            Hand.pAA,
+            Hand.sAK,
+            Hand.sAQ,
+            Hand.sAJ,
+            Hand.sAT,
+            Hand.sA9,
+            Hand.sA8,
+            Hand.oAK,
+            Hand.pKK,
+            Hand.sKQ,
+            Hand.sKJ,
+            Hand.sKT,
+            Hand.oAQ,
+            Hand.oKQ,
+            Hand.pQQ,
+            Hand.p55,
+            Hand.sQJ,
+            Hand.sQT,
+            Hand.oAJ,
+            Hand.oKJ,
+            Hand.pJJ,
+            Hand.sJT,
+            Hand.oAT,
+            Hand.pTT,
+            Hand.p99,
+            Hand.p88,
+            Hand.p77,
+            Hand.p66,
+          ])
+)
+
+
+
+  fromJson(json: string): HandRange {
+    const parsed = JSON.parse(json)
+    const handLabels: string[] = parsed.hands
+    const hands = new Set(handLabels.map(hl => Hand.label2Hand(hl)))
+    return new HandRange(parsed.name, parsed.description, hands)
   }
 
-  narrowedCombos(condition: Condition): Set<Combo> {
-    return new Set(Array.from(this.combos).filter(c => condition.condition(c)))
-  }
+  static Empty = new HandRange('', '', new Set());
 
   addHand(hand: Hand) {
-    this.add(hand);
+    this.hands.add(hand);
     hand.combos.forEach(c => this.combos.add(c));
   }
 
-
   removeHand(hand: Hand) {
-    this.delete(hand);
+    this.hands.delete(hand);
     hand.combos.forEach(c => this.combos.delete(c));
   }
 
   toggleHand(hand: Hand) {
-    if (!this.has(hand)) {
+    if (!this.hands.has(hand)) {
       this.addHand(hand);
     } else {
       this.removeHand(hand);
     }
   }
 
-  // すでに存在するかどうかに関わらず登録する
-  addHandAnyway(hand: Hand) {
-    this.addHand(hand)
-  }
-
-  // すでに存在するかどうかに関わらず登録する
-  removeHandAnyway(hand: Hand) {
-    this.removeHand(hand)
-  }
-
   allClear() {
-    this.clear();
-    this.combos = new Set();
+    this.hands.clear();
+    this.combos.clear()
   }
-
-  hasByLabel(label: string): boolean {
-    return this.has(Hand.label2Hand(label));
-  }
-
-
-
-  // numOfCombo(): number {
-  //   let count = 0;
-  //   this.forEach(hand => {
-  //     count = count + hand.combos.length;
-  //   });
-  //   return count;
-  // }
-
-  toString() {
-    let s = '';
-    for (const h of this.values()) {
-      s = s + h.label + ' ';
-    }
-    return s;
-  }
-
 
 }
-
