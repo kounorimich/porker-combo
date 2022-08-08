@@ -1,3 +1,11 @@
+under construction
+
+# About
+simple tool to count hole cards' combos.
+You can set hand ranges and conditions.
+
+![img.png](img.png)
+
 # model
 
 #1. CardSuit
@@ -8,7 +16,7 @@
    * Spade: 's'
 
 
-#2. CardVNumber
+#2. CardNumber
    * 2 ~ 14までのカードの数字
      * Aは一番強いため、1ではなく14で表現
 
@@ -27,6 +35,10 @@
 #5 Hand
   * 「Aのポケットペア」「AとKのスーテッド」「AとKのオフスーテッド」といった、Comboを戦略的に同一のものでまとめたもの。
   * 「Aクラブ、Aダイヤ」「Aダイヤ、Aスペード」といったComboは、「Aのポケットペア」というHandに所属する。
+  * Handに対応するComboは、不変である。AAは固定の6通りのみ。
+
+
+
 
 コードの安全性 vs べた書きのコスト
 関数型っぽくやると、可読性高いが、再描画が必要になる、計算量は多くなる。そこを逐一updateでカバー
