@@ -2,16 +2,16 @@ import {Combo} from '../combo/Combo';
 import {Condition} from '../Condition';
 import {Card} from '../card/Card';
 
-//
+// ハンドとそれに対応するコンボの関係は不変なので、読み取り専用。
 
 export class Hand {
   private static _values = new Array<Hand>()
 
-  label: string;
-  combos: Set<Combo>;
-  constructor(label: string, ...hands: Combo[]) {
+  readonly label: string;
+  readonly allCombos: Set<Combo>;
+  private constructor(label: string, ...hands: Combo[]) {
     this.label = label;
-    this.combos = new Set(hands);
+    this.allCombos = new Set(hands);
     Hand._values.push(this)
   }
   isSuited(): boolean {
@@ -22,7 +22,7 @@ export class Hand {
   }
   // 「A♣をもつ」という条件 → AKsは適合するんだけど、全部ではなく25%。のように、UIの表でも、あり/なしだけじゃなく、pioSolverみたいに、コンボ数を反映させたいのでbooleanではなくカウントする
   countMatchedComboCount(condition: Condition): number {
-    return Array.from(this.combos).filter(combo => condition.check(combo)).length
+    return Array.from(this.allCombos).filter(combo => condition.check(combo)).length
   }
 
   static label2Hand(label: string): Hand {

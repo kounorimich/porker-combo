@@ -9,8 +9,8 @@
         <tr>
 
           <ng-container *ngFor="let hand of row">
-            <ng-container *ngVar=" as comboCount">
-              <td [id]="hand.label" class="hand-option" [class.in-range]="rangeHas(hand)" [class.suited]="hand.isSuited()" [class.pocket-pair]="hand.isPocketPair()"
+            <ng-container *ngVar="listComboOf(hand).size as comboCount">
+              <td [id]="hand.label" class="hand-option" [class.in-range]="isInRange(hand)" [class.suited]="hand.isSuited()" [class.pocket-pair]="hand.isPocketPair()"
                   [class.in-condition]="comboCount > 0" [title]="comboCount">{{hand.label.replace("p", "")}}</td>
             </ng-container>
 
@@ -33,8 +33,8 @@
         </tr>
         <tr>
           <th>Narrowed Combos Count</th>
-          <td>{{narrowedCombos.size}}/{{rangeComboSize}}
-            ({{narrowedCombos.size / rangeComboSize | percent}})
+          <td>{{matchedComboSize}}/{{rangeComboSize}}
+            ({{matchedComboSize / rangeComboSize | percent}})
           </td>
         </tr>
       </table>
@@ -69,10 +69,10 @@
         <tr>
           <ng-container *ngFor="let cn of AllNumber">
             <td>
-              <button class="btn"
-                      [class.number-selected]="targetHasAllCardsOfNumber(includesAnyOf, cn)"
+              <button class="btn" [id]="'includes-any-of-selector-' + cn.label"
+                      [class.number-selected]="includesAnyOfHasAllPossibleCard(cn)"
                       (click)="toggleIncludeAnyOfByNumber(cn)"
-                      [disabled]="targetHasAllCardsOfNumber(blockers, cn)"
+                      [disabled]="blockerHasAllCardOfNumber(cn)"
               >{{cn.label}}</button>
             </td>
           </ng-container>
@@ -83,7 +83,7 @@
             <button class="btn"
                     (click)="toggleIncludeAnyOf(card)"
 
-                    [class.blocker-selected]="includesAnyOf.has(card)"
+                    [class.card-selected]="includesAnyOf.has(card)"
                     [disabled]="blockers.has(card)" [class.disable] = "blockers.has(card)"
             >{{card.label()}}</button>
           </td>
