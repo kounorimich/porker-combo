@@ -1,14 +1,134 @@
-<app-combo-counter [range]="range"></app-combo-counter>
+<div class="row">
+  <div class="col-8">
 
-<div>
-  <h2>Ranges</h2>
-  <ng-container *ngFor="let e of entries">
-    <app-directory-entry *ngIf="e.isFolder" (rangeSelected)="setRange($event)"
-                         [folder]="asFolder(e)"></app-directory-entry>
-    <app-range-entry *ngIf="!e.isFolder" (rangeSelected)="setRange($event)"
-                     [range]="asHandRange(e)"></app-range-entry>
-  </ng-container>
+    <h2 id="hoge">コンボ数：{{range.count}}</h2>
+    <h2>全体の{{ calculatePercentage()}}%</h2>
+    <button class="btn-info btn" (click)="range.allClear()">clear range</button>
+    <table class="range-table">
 
+<!--      レンジ表-->
+      <ng-container *ngFor="let row of All_Row">
+        <tr>
+          <ng-container *ngFor="let hand of row">
+            <td [id]="hand.label" class="hand-option" [class.in-range]="range.hasByLabel(hand.label)" [class.suited]="hand.isSuited()" [class.pocket-pair]="hand.isPocketPair()"
+                [class.in-condition]="inCondition(hand)">{{hand.label.replace("p", "")}}</td>
+
+          </ng-container>
+        </tr>
+      </ng-container>
+
+
+    </table>
+
+    <!--    レンジ、ハンドのカウント-->
+    <div class="col-6">
+      <table class="table" id="narrowed-combo-count-table">
+        <tr>
+          <th>Hand Range Combos Count</th>
+          <td>{{block(range.combos).size}}/{{allComboMinusBlocker.size}}
+            ({{block(range.combos).size / allComboMinusBlocker.size | percent}})
+          </td>
+
+        </tr>
+      </table>
+      <table class="table" id="range-count-table">
+        <tr>
+          <th>Narrowed Combos Count</th>
+          <td>{{narrowedCombos.size}}/{{block(range.combos).size}}
+            ({{narrowedCombos.size / block(range.combos).size | percent}})
+          </td>
+        </tr>
+      </table>
+
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+
+<!--  ハンドを条件で絞るセクション-->
+  <div class="col-4">
+    <h2>Blocker</h2>
+    <button>clear</button>
+    <table>
+      <tr *ngFor="let suit of AllSuits">
+        <td *ngFor="let num of AllNums">
+          <!--        あとで画像に差しかえる-->
+          <button
+            (click)="toggleBlocker(num.value, suit.value)"
+            [class.blocker-selected]="blocker.has(cardFromNumAndSuit(num.value, suit.value))"
+          >{{num.label}}{{suit.label}}</button>
+        </td>
+      </tr>
+
+
+    </table>
+
+
+    <ng-template [ngTemplateOutlet]="narrowing_type_option1"></ng-template>
+
+
+  </div>
 </div>
+
+<ng-template #narrowing_type_option1>
+  <input type="radio" id="opt1-have" [(ngModel)]="opt1_selected" [value]="0" (selectionchange)="opt1_selected = 0">
+  <label for="opt1-have">have</label>
+  <input type="radio" id="opt1-suited" value="suited" [(ngModel)]="opt1_selected" (selectionchange)="opt1_selected = 1">
+  <label for="opt1-suited">suited</label>
+  <input type="radio" id="opt1-pocket-pair" value="pocket-pair" [(ngModel)]="opt1_selected" (selectionchange)="opt1_selected = 2">
+  <label for="opt1-pocket-pair">pocket-pair</label>
+<!--  <select #narrowing_type name="narrowing_type" id="">-->
+<!--    <option #opt1 value="have">have</option>-->
+<!--    <option value="suited_with">suited with</option>-->
+<!--    <option value="pair_of">pair of</option>-->
+<!--  </select>-->
+
+  <table *ngIf="opt1_selected === 0">
+    <tr>
+      <td *ngFor="let num of AllNums">
+        <button [class.narrowingByNum-selected]="narrowing_1_selectedNum === num.value"
+                (click)="updateNarrowing_1_byNum(0, num.value.toString())">{{num.label}}</button>
+      </td>
+    </tr>
+    <tr *ngFor="let suit of AllSuits">
+      <td *ngFor="let num of AllNums">
+        <!--        あとで画像に差しかえる-->
+        <button
+        >{{num.label}}{{suit.label}}</button>
+
+      </td>
+    </tr>
+
+
+  </table>
+</ng-template>
+
+
+<!--選択肢をここに用意-->
+<ng-template name="" #numOptions hidden>
+  <option value="Any" [defaultSelected]="true">Any</option>
+  <option value="14">A</option>
+  <option value="13">K</option>
+  <option value="12">Q</option>
+  <option value="11">J</option>
+  <option value="10">T</option>
+  <option value="9">9</option>
+  <option value="8">8</option>
+  <option value="7">7</option>
+  <option value="6">7</option>
+  <option value="5">5</option>
+  <option value="4">4</option>
+  <option value="3">3</option>
+  <option value="2">2</option>
+</ng-template>
+
+<ng-template name="" #suitOptions hide>
+  <option value="Any" [defaultSelected]="true">Any</option>
+  <option value="c">♣</option>
+  <option value="d">♦</option>
+  <option value="h">♥</option>
+  <option value="s">♠</option>
+</ng-template>
+
 
 
