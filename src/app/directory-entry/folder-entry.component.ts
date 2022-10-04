@@ -12,6 +12,7 @@ export class FolderEntry implements OnInit {
 
   @Input() folder: Folder
   @Output() rangeSelected: EventEmitter<any> = new EventEmitter<any>()
+  isCollapsed = true;
 
   constructor() { }
 

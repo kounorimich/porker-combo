@@ -1,6 +1,6 @@
-<div class="row" style="margin: 20px;">
+<div class="row" style="margin: 5px;">
   <h1>{{range.name}}</h1>
-  <div class="col-4">
+  <div class="col-lg-4 col-sm-12">
     <button class="btn-info btn clear-btn" (click)="clearRange()">clear range</button>
     <table class="range-table">
 
@@ -10,7 +10,8 @@
 
           <ng-container *ngFor="let hand of row">
             <ng-container *ngVar="listComboOf(hand).size as comboCount">
-              <td [id]="hand.label" class="hand-option" [class.in-range]="isInRange(hand)" [class.suited]="hand.isSuited()" [class.pocket-pair]="hand.isPocketPair()"
+              <td [id]="hand.label" class="hand-option" [class.in-range]="isInRange(hand)"
+                  [class.suited]="hand.isSuited()" [class.pocket-pair]="hand.isPocketPair()"
                   [class.in-condition]="comboCount > 0" [title]="comboCount">{{hand.label.replace("p", "")}}</td>
             </ng-container>
 
@@ -23,8 +24,9 @@
     </table>
 
     <!--    レンジ、ハンドのカウント-->
-    <div>
-      <table class="table table-light" id="narrowed-combo-count-table" title="'<combos of this range> / <all possible combos>'. In Both, blockers are into account.">
+    <div class="col-4 col-md-12">
+      <table class="table table-light" id="narrowed-combo-count-table"
+             title="'<combos of this range> / <all possible combos>'. In Both, blockers are into account.">
         <tr>
           <th>Hand Range Combos Count</th>
           <td>{{rangeComboSize}}/{{allCombo.size}}
@@ -44,7 +46,7 @@
 
 
   <!--  ハンドを条件で絞るセクション-->
-  <div class="col-8">
+  <div class="col-lg-8 col-sm-12">
     <div class="condition-panel">
       <h2>Blocker</h2>
       <button (click)="clearBlocker()" class="btn btn-info clear-btn">clear</button>
@@ -52,7 +54,7 @@
         <tr *ngFor="let row of AllCardsGroupedBySuit">
           <td *ngFor="let card of row">
             <!--        あとで画像に差しかえる-->
-            <button class="btn"
+            <button class="btn responsive-font"
                     (click)="toggleBlocker(card)"
                     [class.blocker-selected]="blockers.has(card)"
             >{{card.label()}}</button>
@@ -69,7 +71,7 @@
         <tr>
           <ng-container *ngFor="let cn of AllNumber">
             <td>
-              <button class="btn" [id]="'includes-any-of-selector-' + cn.label"
+              <button class="btn responsive-font" [id]="'includes-any-of-selector-' + cn.label"
                       [class.number-selected]="includesAnyOfHasAllPossibleCard(cn)"
                       (click)="toggleIncludeAnyOfByNumber(cn)"
                       [disabled]="blockerHasAllCardOfNumber(cn)"
@@ -80,11 +82,11 @@
         <tr *ngFor="let row of AllCardsGroupedBySuit">
           <td *ngFor="let card of row">
             <!--        あとで画像に差しかえる-->
-            <button class="btn"
+            <button class="btn responsive-font"
                     (click)="toggleIncludeAnyOf(card)"
 
                     [class.card-selected]="includesAnyOf.has(card)"
-                    [disabled]="blockers.has(card)" [class.disable] = "blockers.has(card)"
+                    [disabled]="blockers.has(card)" [class.disable]="blockers.has(card)"
             >{{card.label()}}</button>
           </td>
         </tr>
@@ -92,8 +94,6 @@
 
     </div>
   </div>
-
-
 
 
 </div>

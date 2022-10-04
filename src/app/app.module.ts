@@ -8,6 +8,7 @@ import { VarDirective } from './var.directive';
 import { FolderEntry } from './directory-entry/folder-entry.component';
 import { ComboCounterComponent } from './combo-counter/combo-counter.component';
 import { RangeEntryComponent } from './directory-entry/range-entry.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RangeEntryComponent } from './directory-entry/range-entry.component';
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        NgbModule
     ],
   providers: [],
   bootstrap: [AppComponent]

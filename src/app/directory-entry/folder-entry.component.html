@@ -1,5 +1,7 @@
 <li>
-  {{folder.name}}
+  <button type="button" class="" (click)="collapse.toggle()" [attr.aria-expanded]="isCollapsed"
+          aria-controls="collapseExample" [class.opened-dir]="!collapse.collapsed">➡</button>{{folder.name}}
+  <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
   <ul>
     <ng-container *ngFor="let e of folder.directoryEntries">
 
@@ -9,4 +11,5 @@
                        [range]="asHandRange(e)"></app-range-entry>
     </ng-container>
   </ul>
+  </div>
 </li>
